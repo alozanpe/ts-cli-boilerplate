@@ -1,0 +1,58 @@
+{
+  "name": "ts-cli-boilerplate",
+  "version": "0.0.1",
+  "description": "ts-cli-boilerplate app",
+  "author": "Alfonso Lozano Pérez <alozanpe@gmail.com>",
+  "license": "GPLv2",
+  "main": "./build/index.js",
+  "bin": {
+    "ts-cli-boilerplate": "./build/index.js"
+  },
+  "scripts": {
+    "package-mac": "npm run build:release && pkg . --targets node14-macos-x64 --output ./bin/ts-cli-boilerplate-mac",
+    "package-win": "npm run build:release && pkg . --targets node16-win --output ./bin/ts-cli-boilerplate-win",
+    "package-lnx": "npm run build:release && pkg . --targets node16-linux --output ./bin/ts-cli-boilerplate-lnx",
+    "start": "npm run build && node build/index.js",
+    "clean": "rimraf coverage build tmp",
+    "prebuild": "npm run lint",
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -w -p tsconfig.json",
+    "build:release": "npm run clean && tsc -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts --ext .mts",
+    "test": "jest --coverage",
+    "prettier": "prettier --config .prettierrc --write .",
+    "test:watch": "jest --watch"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "assets": [
+      "node_modules/figlet/fonts/Standard.flf"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
+    "commander": "^9.4.1",
+    "figlet": "^1.5.2",
+    "tslib": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/clear": "^0.1.2",
+    "@types/commander": "^2.12.2",
+    "@types/figlet": "^1.5.5",
+    "@types/jest": "^29.1.2",
+    "@types/node": "^18.8.3",
+    "@typescript-eslint/eslint-plugin": "^5.39.0",
+    "@typescript-eslint/parser": "^5.39.0",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^27.1.1",
+    "jest": "^29.1.2",
+    "pkg": "^5.8.0",
+    "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
+}
